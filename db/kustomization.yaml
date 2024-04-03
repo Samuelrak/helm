@@ -1,0 +1,12 @@
+resources:
+  - mysql-deployment.yaml
+  - mysql-service.yaml
+
+
+configMapGenerator:
+- name: mysql-config
+  literals:
+   - MARIADB_USER=example-user
+   - MARIADB_PASSWORD=my_cool_secret
+   - MARIADB_DATABASE=exmple-database
+   - MARIADB_ROOT_PASSWORD=my-secret-pw
