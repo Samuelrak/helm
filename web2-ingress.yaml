@@ -1,10 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: webpage-ingress
+  name: mytravel-ingress
+  namespace: travel
+  annotations:
+    spec.ingressClassName: traefik
 spec:
   rules:
-    - host: mytravel-123.com
+    - host: mytravel123.eu
       http:
         paths:
           - path: /
@@ -21,7 +24,7 @@ spec:
                 name: backend-auth-service
                 port:
                   number: 5000
-          - path: /api/tours
+          - path: /api/tours/
             pathType: Prefix
             backend:
               service:

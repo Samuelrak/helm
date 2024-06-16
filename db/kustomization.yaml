@@ -1,12 +1,16 @@
 resources:
-  - mysql-deployment.yaml
-  - mysql-service.yaml
-
-
+- mysql-service.yaml
+- mysql-statefulset.yaml
 configMapGenerator:
 - name: mysql-config
+  files:
+    - my.cnf=my.cnf
   literals:
-   - MARIADB_USER=example-user
-   - MARIADB_PASSWORD=my_cool_secret
-   - MARIADB_DATABASE=exmple-database
-   - MARIADB_ROOT_PASSWORD=my-secret-pw
+  - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=true
+  - MARIADB_USER=root
+#  - HOSTNAME=mysql-service.travel.svc.cluster.local
+  - HOSTNAME=mysql-headless
+
+- name: init-db
+  files:
+    - traveltours.sql=traveltours.sql
